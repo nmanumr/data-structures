@@ -1,6 +1,13 @@
 #include <malloc.h>
 #include "SingleLinkedList.h"
 
+
+template<typename T>
+SingleLinkedList<T>::SingleLinkedList() {
+    this->head = nullptr;
+    this->tail = nullptr;
+}
+
 template<typename T>
 void SingleLinkedList<T>::add(T item) {
     auto *node = (SingleLinkedListNode<T>*) malloc(sizeof(SingleLinkedListNode<T>));
@@ -9,8 +16,6 @@ void SingleLinkedList<T>::add(T item) {
 
     if (this->head == nullptr) {
         this->head = node;
-    } else if (this->head->next == nullptr) {
-        this->head->next = node;
     } else if (this->tail != nullptr) {
         this->tail->next = node;
     }
@@ -19,7 +24,9 @@ void SingleLinkedList<T>::add(T item) {
 
 template<typename T>
 void SingleLinkedList<T>::addFirst(T item) {
-    SingleLinkedListNode<T> *node = {item, this->head};
+    auto *node = (SingleLinkedListNode<T>*) malloc(sizeof(SingleLinkedListNode<T>));
+    node->data = item;
+    node->next = this->head;
     this->head = node;
 }
 
@@ -133,6 +140,16 @@ T SingleLinkedList<T>::remove() {
 }
 
 template<typename T>
-int SingleLinkedList<T>::remove(T item) {
-    return 0;
+T SingleLinkedList<T>::removeFirst() {
+    T tmp = this->head->data;
+    if (this->head == this->tail) {
+        delete this->head;
+        this->head = nullptr;
+        this->tail = nullptr;
+    } else {
+        SingleLinkedListNode<T> *node = this->head->next;
+        delete this->head;
+        this->head = node;
+    }
+    return tmp;
 }

@@ -14,10 +14,7 @@ private:
     SingleLinkedListNode<T> *tail;
 
 public:
-    SingleLinkedList() {
-        this->head = nullptr;
-        this->tail = nullptr;
-    };
+    SingleLinkedList();
 
     /**
      * Adds an item at the end
@@ -100,6 +97,8 @@ public:
      * @return size of the linked list
      */
     int size();
+
+    void print();
 };
 
 

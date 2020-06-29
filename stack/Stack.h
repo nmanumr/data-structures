@@ -1,7 +1,7 @@
 #ifndef DSA_STACK_H
 #define DSA_STACK_H
 
-#include "SingleLinkedList.cpp"
+#include "../linkedlist/SingleLinkedList.cpp"
 
 template<typename T>
 class Stack {
