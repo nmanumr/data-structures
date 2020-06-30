@@ -29,7 +29,7 @@ public:
      * @param item item to be added
      * @param priority priority of the item default is 0
      */
-    void enqueue(T item, int priority=0);
+    void enqueue(T item, int priority = 0);
 
     /**
      * Remove first item from the queue and return it

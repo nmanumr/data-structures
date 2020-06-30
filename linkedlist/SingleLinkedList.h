@@ -92,10 +92,15 @@ public:
      * @return return removed item
      */
     T removeByIndex(int index);
+
     int remove(T item);
+
     int removeRight(T item);
+
     T removeFirst();
+
     T removeLast();
+
     void set(int index, T item);
 
     /**

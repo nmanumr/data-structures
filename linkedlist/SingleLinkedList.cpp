@@ -11,7 +11,7 @@ SingleLinkedList<T>::SingleLinkedList() {
 
 template<typename T>
 void SingleLinkedList<T>::add(T item) {
-    auto *node = (SingleLinkedListNode<T>*) malloc(sizeof(SingleLinkedListNode<T>));
+    auto *node = (SingleLinkedListNode<T> *) malloc(sizeof(SingleLinkedListNode<T>));
     node->data = item;
     node->next = nullptr;
 
@@ -25,7 +25,7 @@ void SingleLinkedList<T>::add(T item) {
 
 template<typename T>
 void SingleLinkedList<T>::addFirst(T item) {
-    auto *node = (SingleLinkedListNode<T>*) malloc(sizeof(SingleLinkedListNode<T>));
+    auto *node = (SingleLinkedListNode<T> *) malloc(sizeof(SingleLinkedListNode<T>));
     node->data = item;
     node->next = this->head;
     this->head = node;
@@ -71,7 +71,7 @@ void SingleLinkedList<T>::addWhere(T item, std::function<bool(T, T)> predicate) 
 
     while (node != nullptr) {
         if (predicate(node->data, item)) {
-            auto *itemNode = (SingleLinkedListNode<T>*) malloc(sizeof(SingleLinkedListNode<T>));
+            auto *itemNode = (SingleLinkedListNode<T> *) malloc(sizeof(SingleLinkedListNode<T>));
             itemNode->data = item;
             itemNode->next = node;
 
