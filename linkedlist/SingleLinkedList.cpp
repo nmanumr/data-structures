@@ -1,4 +1,5 @@
 #include <malloc.h>
+#include <functional>
 #include "SingleLinkedList.h"
 
 
@@ -28,12 +29,17 @@ void SingleLinkedList<T>::addFirst(T item) {
     node->data = item;
     node->next = this->head;
     this->head = node;
+
+    if (this->tail == nullptr) {
+        this->tail = node;
+    }
 }
 
 template<typename T>
 bool SingleLinkedList<T>::add(int index, T item) {
     if (index == 0) {
         this->addFirst(item);
+        return true;
     }
 
     int i = 0;
@@ -51,6 +57,37 @@ bool SingleLinkedList<T>::add(int index, T item) {
         node = node->next;
     }
     return false;
+}
+
+template<typename T>
+void SingleLinkedList<T>::addWhere(T item, std::function<bool(T, T)> predicate) {
+    SingleLinkedListNode<T> *node = this->head;
+    SingleLinkedListNode<T> *lastNode = nullptr;
+
+    if (this->head == nullptr) {
+        this->addFirst(item);
+        return;
+    }
+
+    while (node != nullptr) {
+        if (predicate(node->data, item)) {
+            auto *itemNode = (SingleLinkedListNode<T>*) malloc(sizeof(SingleLinkedListNode<T>));
+            itemNode->data = item;
+            itemNode->next = node;
+
+            if (lastNode != nullptr) {
+                lastNode->next = itemNode;
+            } else {
+                this->addFirst(item);
+            }
+            return;
+        }
+
+        lastNode = node;
+        node = node->next;
+    }
+
+    this->add(item);
 }
 
 template<typename T>

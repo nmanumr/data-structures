@@ -1,13 +1,13 @@
-#include <iostream>
-#include "queue/LinearQueue.cpp"
+#include "queue/Queue.cpp"
 
 using namespace std;
 
 int main() {
-    LinearQueue<int> queue;
+    Queue<int> queue;
     queue.enqueue(10);
     queue.enqueue(20);
-    cout << queue.size() << endl;
-    cout << queue.dequeue() << endl;
-    cout << queue.dequeue() << endl;
+    queue.enqueue(30);
+    queue.enqueue(30, 1);
+    queue.enqueue(30, 2);
+    queue.enqueue(30, 1);
 }

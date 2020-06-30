@@ -31,6 +31,12 @@ public:
     bool add(int index, T item);
 
     /**
+     * Adds an element where predicate is true otherwise at the end of lst
+     * @param item item to be inserted
+     */
+    void addWhere(T item, std::function<bool(T, T)>);
+
+    /**
      * Add an item at head of list
      * @param item item to be inserted
      */
