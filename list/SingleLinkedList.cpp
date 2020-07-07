@@ -36,27 +36,30 @@ void SingleLinkedList<T>::addFirst(T item) {
 }
 
 template<typename T>
-bool SingleLinkedList<T>::add(int index, T item) {
-    if (index == 0) {
+void SingleLinkedList<T>::add(int index, T item) {
+    if (index <= 0) {
         this->addFirst(item);
-        return true;
+        return;
     }
 
     int i = 0;
     SingleLinkedListNode<T> *node = this->head;
     while (node != nullptr && i < index) {
         if (i == index - 1) {
-            SingleLinkedListNode<T> *itemNode = {item, node->next};
-            if (node->next == this->tail) {
+            auto *itemNode = (SingleLinkedListNode<T> *) malloc(sizeof(SingleLinkedListNode<T>));
+            itemNode->data = item;
+            itemNode->next = node->next;
+
+            if (node == this->tail) {
                 this->tail = itemNode;
             }
             node->next = itemNode;
-            return true;
+            return;
         }
         i++;
         node = node->next;
     }
-    return false;
+    this->add(item);
 }
 
 template<typename T>
@@ -117,14 +120,13 @@ int SingleLinkedList<T>::lastIndexOf(T item) {
 
 template<typename T>
 T SingleLinkedList<T>::get(int index) {
-    for (
-            SingleLinkedListNode<T> *node = this->head, i = 0;
-            node != nullptr;
-            node = node->next, i++
-            ) {
+    int i = 0;
+    SingleLinkedListNode<T> *node = this->head;
+    while (node != nullptr) {
         if (i == index) { return node->data; }
+        i++;
+        node = node->next;
     }
-    return nullptr;
 }
 
 template<typename T>

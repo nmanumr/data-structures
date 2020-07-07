@@ -28,7 +28,7 @@ public:
      * @param item item to be inserted
      * @return return true if `index` is a valid index
      */
-    bool add(int index, T item);
+    void add(int index, T item);
 
     /**
      * Adds an element where predicate is true otherwise at the end of lst

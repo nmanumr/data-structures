@@ -1,7 +1,7 @@
 #ifndef DSA_QUEUE_H
 #define DSA_QUEUE_H
 
-#include "../linkedlist/SingleLinkedList.cpp"
+#include "../list/SingleLinkedList.cpp"
 
 template<typename T>
 struct QueueItem {
