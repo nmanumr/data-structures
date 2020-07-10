@@ -4,12 +4,6 @@
 
 
 template<typename T>
-SingleLinkedList<T>::SingleLinkedList() {
-    this->head = nullptr;
-    this->tail = nullptr;
-}
-
-template<typename T>
 void SingleLinkedList<T>::add(T item) {
     auto *node = (SingleLinkedListNode<T> *) malloc(sizeof(SingleLinkedListNode<T>));
     node->data = item;
@@ -127,6 +121,7 @@ T SingleLinkedList<T>::get(int index) {
         i++;
         node = node->next;
     }
+    return 0;
 }
 
 template<typename T>
@@ -191,4 +186,9 @@ T SingleLinkedList<T>::removeFirst() {
         this->head = node;
     }
     return tmp;
+}
+
+template<typename T>
+T SingleLinkedList<T>::set(int index, T item) {
+
 }

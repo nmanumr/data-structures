@@ -1,3 +1,6 @@
+#include <iostream>
+#include <cstdarg>
+
 #ifndef DSA_SINGLELINKEDLIST_H
 #define DSA_SINGLELINKEDLIST_H
 
@@ -14,7 +17,23 @@ private:
     SingleLinkedListNode<T> *tail;
 
 public:
-    SingleLinkedList();
+    SingleLinkedList() {
+        this->head = nullptr;
+        this->tail = nullptr;
+    };
+
+    explicit SingleLinkedList(T item, ...) {
+        this->head = nullptr;
+        this->tail = nullptr;
+
+        va_list arguments;
+
+        va_start (arguments, item);
+        for (int x = 0; x < item; x++) {
+            this->add(va_arg (arguments, T));
+        }
+        va_end (arguments);
+    };
 
     /**
      * Adds an item at the end
@@ -99,17 +118,18 @@ public:
 
     T removeFirst();
 
-    T removeLast();
-
-    void set(int index, T item);
+    /**
+     * replace nth element with new item
+     * @param index
+     * @param item
+     */
+    T set(int index, T item);
 
     /**
      * find size of linked list
      * @return size of the linked list
      */
     int size();
-
-    void print();
 };
 
 

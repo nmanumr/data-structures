@@ -1,13 +1,13 @@
-#include "queue/Queue.cpp"
+#include <iostream>
+#include "list/SingleLinkedList.cpp"
 
 using namespace std;
 
 int main() {
-    Queue<int> queue;
-    queue.enqueue(10);
-    queue.enqueue(20);
-    queue.enqueue(30);
-    queue.enqueue(30, 1);
-    queue.enqueue(30, 2);
-    queue.enqueue(30, 1);
+    SingleLinkedList<int> lst;
+    lst.add(0);
+    lst.add(1);
+    lst.add(2);
+    lst.add(1);
+    lst.add(0);
 }
