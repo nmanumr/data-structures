@@ -5,7 +5,7 @@
 
 template<typename T>
 void SingleLinkedList<T>::add(T item) {
-    auto *node = (SingleLinkedListNode<T> *) malloc(sizeof(SingleLinkedListNode<T>));
+    auto node = new SingleLinkedListNode<T>();
     node->data = item;
     node->next = nullptr;
 
@@ -161,14 +161,20 @@ template<typename T>
 T SingleLinkedList<T>::remove() {
     T tmp = this->tail->data;
 
-    SingleLinkedListNode<T> *node = this->head;
-    while (node->next != this->tail) {
-        node = node->next;
-    }
-    node->next = nullptr;
+    if (this->head != this->tail) {
+        SingleLinkedListNode<T> *node = this->head;
 
-    delete this->tail;
-    this->tail = node;
+        while (node->next != this->tail) {
+            node = node->next;
+        }
+        node->next = nullptr;
+        delete this->tail;
+        this->tail = node;
+    } else {
+        delete this->tail;
+        this->head = nullptr;
+        this->tail = nullptr;
+    }
 
     return tmp;
 }
