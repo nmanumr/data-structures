@@ -1,8 +1,25 @@
 #include <iostream>
 #include <string>
+#include <exception>
+#include <utility>
 #include <math.h>
 
 #include "stack/Stack.cpp"
+
+
+struct ParseError : public std::exception
+{
+    std::string msg;
+
+    explicit ParseError(std::string msg) {
+        this->msg = std::move(msg);
+    }
+
+    const char * what () const noexcept override
+    {
+        return this->msg.c_str();
+    }
+};
 
 enum TokenType {
     OPERATOR,
@@ -70,7 +87,7 @@ public:
     }
 
     void throwError(const std::string& msg) {
-        std::string temp;
+        std::string temp = "\n";
         temp += this->str;
         temp += "\n";
         for (int i = 1; i < this->p; i++) {
@@ -78,7 +95,7 @@ public:
         }
         temp += "^\n";
         temp += msg;
-        throw temp;
+        throw ParseError(temp);
     }
 
     void reset() {
@@ -98,7 +115,7 @@ private:
             operands.push(op1 + op2 + op);
         }
         if (operators.size() > 0 || operands.size() > 1) {
-            throw "Invalid expression";
+            throw ParseError("Invalid expression");
         }
         return operands.pop();
     }
@@ -206,7 +223,7 @@ public:
 };
 
 int main() {
-    ExpressionParser parser("(2*3)+(4*5)");
+    ExpressionParser parser("(2*3)+(4*5))");
     std::cout << parser.toPostfix() << "\n";
     std::cout << parser.evaluate() << "\n";
     return 0;
