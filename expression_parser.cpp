@@ -2,7 +2,7 @@
 #include <string>
 #include <exception>
 #include <utility>
-#include <math.h>
+#include <cmath>
 
 #include "stack/Stack.cpp"
 
