@@ -107,7 +107,7 @@ class ExpressionParser {
 private:
     Stream stream;
 
-    std::string buildOperands(Stack<std::string> operands, Stack<std::string> operators) {
+    static std::string buildOperands(Stack<std::string> operands, Stack<std::string> operators) {
         while (operands.size() > 1 && operators.size() > 0) {
             std::string op2 = operands.pop();
             std::string op1 = operands.pop();
