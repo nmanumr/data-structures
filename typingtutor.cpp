@@ -38,12 +38,6 @@ int removeRight(T el, T *arr, int size) {
     return -1;
 }
 
-struct Character {
-    char chr;
-    int x;
-    int y;
-};
-
 class TypingTutor {
 private:
     int lives{};
