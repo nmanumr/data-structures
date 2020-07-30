@@ -43,40 +43,7 @@ private:
     int lives{};
     int *characters;
     int interval;
-
-public:
-
-    void setup() {
-        srand(time(nullptr));
-        this->lives = 5;
-        this->characters = (int *) malloc(sizeof(int) * terminalWidth * terminalHeight);
-        this->interval = 1000;
-
-        for (int i = 0; i < terminalHeight; i++) {
-            for (int j = 0; j < terminalWidth; j++) {
-                this->characters[i * terminalWidth + j] = 32;
-            }
-        }
-    }
-
-    void loop() {
-        this->scroll();
-        this->generateLine();
-        this->draw();
-
-        clock_t start_time = clock();
-        while (clock() < start_time + 1000 * this->interval) {
-            fflush(stdin);
-            int k = kbhit();
-            if ((k >= 'a' && k <= 'z') || (k >= '0' && k <= '9')) {
-                removeRight<int>(k, this->characters, terminalHeight * terminalWidth);
-                this->draw();
-            }
-        }
-
-        loop();
-    }
-
+    
     void generateLine() {
         int charsPerLine = random(2, 5);
         for (int i = 0; i < charsPerLine; i++) {
@@ -116,6 +83,39 @@ public:
             cout << "═";
         }
         cout << "╝\n";
+    }
+
+public:
+
+    void setup() {
+        srand(time(nullptr));
+        this->lives = 5;
+        this->characters = (int *) malloc(sizeof(int) * terminalWidth * terminalHeight);
+        this->interval = 1000;
+
+        for (int i = 0; i < terminalHeight; i++) {
+            for (int j = 0; j < terminalWidth; j++) {
+                this->characters[i * terminalWidth + j] = 32;
+            }
+        }
+    }
+
+    void loop() {
+        this->scroll();
+        this->generateLine();
+        this->draw();
+
+        clock_t start_time = clock();
+        while (clock() < start_time + 1000 * this->interval) {
+            fflush(stdin);
+            int k = kbhit();
+            if ((k >= 'a' && k <= 'z') || (k >= '0' && k <= '9')) {
+                removeRight<int>(k, this->characters, terminalHeight * terminalWidth);
+                this->draw();
+            }
+        }
+
+        loop();
     }
 };
 
